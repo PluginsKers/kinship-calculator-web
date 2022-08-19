@@ -1,0 +1,79 @@
+* {
+	overflow: hidden;
+}
+
+html, body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #eee;
+	margin: 0;
+	padding: 0;
+}
+
+.calculator {
+	--button-width: 80px;
+	--button-height: 80px;
+
+	display: grid;
+	grid-template-areas: "result result result result"
+		"result result result result"
+		"result result result result"
+		"dad mom back ac"
+		"brother younger_brother husband wife"
+		"sister younger_sister son daughter"
+		"selector selector equal equal";
+		
+	grid-template-columns: repeat(4, var(--button-width));
+	grid-template-rows: repeat(6, var(--button-height));
+
+	padding: 24px;
+}
+
+
+.calculator .equal {
+	border-radius: calc(var(--button-height) / 5);
+}
+
+.calculator .selector {
+	grid-area: selector;
+	padding: 5%;
+	box-shadow: none;
+	border: 3px solid #d5d5d5;
+	background: rgb(233 233 233);
+	border-radius: calc(var(--button-height) / 5);
+}
+
+.calculator button {
+	margin: 8px;
+	padding: 0;
+	border: 0;
+	display: block;
+	outline: none;
+	border-radius: calc(var(--button-height) / 5);
+	font-size: 24px;
+	font-family: Helvetica;
+	font-weight: normal;
+	color: #999;
+	background: linear-gradient(135deg, rgba(230, 230, 230, 1) 0%, rgba(246, 246, 246, 1) 100%);
+	box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1), 4px 4px 10px -8px rgba(0, 0, 0, .3);
+}
+
+.calculator button.disabled {
+	background: linear-gradient(135deg, rgb(225 225 225) 0%, rgb(231 231 231) 100%);
+	box-shadow: 5px 5px 10px #eeeeee, -5px -5px 10px #eeeeee;
+}
+
+.calculator button:active:not(.selector, .disabled) {
+	box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1) inset, 4px 4px 10px -8px rgba(0, 0, 0, .3) inset;
+}
+
+.result {
+	text-align: right;
+	line-height: var(--button-height);
+	font-size: 24px;
+	font-family: Helvetica;
+	padding: 0 10px;
+	color: #666;
+}
