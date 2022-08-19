@@ -66,10 +66,8 @@ html, body {
 	box-shadow: 5px 5px 10px #eeeeee, -5px -5px 10px #eeeeee;
 }
 
-.calculator button:active:not(.selector, .disabled),
-.calculator button:focus:not(.selector, .disabled),
-.calculator button:visited:not(.selector, .disabled),
-.calculator button:target:not(.selector, .disabled) {
+/* .calculator button:active:not(.selector, .disabled), */
+.calculator button.active:not(.selector, .disabled) {
 	box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1) inset, 4px 4px 10px -8px rgba(0, 0, 0, .3) inset;
 }
 

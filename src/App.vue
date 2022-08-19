@@ -2,13 +2,19 @@
 // @ts-ignore
 import relationship from "relationship.js"
 
-import { reactive, watch, onMounted} from 'vue'
+import { reactive, watch, onMounted } from 'vue'
+
+type data = {
+  timer: Object | any,
+}
 
 let data = reactive({
 	search: '',
 	append: '',
 	result: '------',
-	sex: 1
+	sex: 1,
+	isActive: '',
+	timer: 0,
 });
 
 /**
@@ -51,12 +57,18 @@ const _selector = () => {
 }
 
 const _clear = () => {
+
+	_active.call(_append, "clear");
+
 	data.search = '';
 	data.append = '';
 	data.result = '------';
 }
 
 const _delete = () => {
+
+	_active.call(_append, "delete");
+
 	let index = data.search.lastIndexOf('的'),
 		search = data.search;
 	index = Math.max(0, index);
@@ -75,6 +87,9 @@ const _delete = () => {
 }
 
 const _append = (v: string) => {
+
+	_active.call(_append, v);
+
 	let arr = data.search.split('的'),
 		search = data.search
 
@@ -90,6 +105,9 @@ const _append = (v: string) => {
 }
 
 const _calculate = () => {
+
+	_active.call(_append, 'calculate');
+
 	if (!data.search) {
 		data.append = '';
 		data.result = '------';
@@ -106,6 +124,14 @@ const _calculate = () => {
 			data.result = '未知';
 		}
 	}
+}
+
+const _active = (n: string) => {
+	if (data.timer) clearTimeout(data.timer);
+	data.isActive = n;
+	data.timer = setTimeout(() => {
+		data.isActive = '';
+	}, 120);
 }
 </script>
 
@@ -133,25 +159,31 @@ const _calculate = () => {
 			{{ data.result }}
 		</div>
 
-		<button style="grid-area: ac" @click="_clear">AC</button>
-		<button class="equal" style="grid-area: equal" @click="_calculate">=</button>
+		<button :class="{ active: data.isActive === 'clear' }" style="grid-area: ac" @click="_clear">AC</button>
+		<button :class="{ active: data.isActive === 'calculate', equal: true }" style="grid-area: equal"
+			@click="_calculate">=</button>
 
-		<button style="grid-area: son" @click="_append('儿子')">子</button>
-		<button style="grid-area: daughter" @click="_append('女儿')">女</button>
+		<button :class="{ active: data.isActive === '儿子' }" style="grid-area: son" @click="_append('儿子')">子</button>
+		<button :class="{ active: data.isActive === '女儿' }" style="grid-area: daughter"
+			@click="_append('女儿')">女</button>
 
-		<button style="grid-area: brother" @click="_append('哥哥')">兄</button>
-		<button style="grid-area: younger_brother" @click="_append('弟弟')">弟</button>
+		<button :class="{ active: data.isActive === '哥哥' }" style="grid-area: brother" @click="_append('哥哥')">兄</button>
+		<button :class="{ active: data.isActive === '弟弟' }" style="grid-area: younger_brother"
+			@click="_append('弟弟')">弟</button>
 
-		<button :class="(data.sex == 1) ? 'disabled' : ''" style="grid-area: husband" @click="_append('老公')">夫</button>
-		<button :class="(data.sex == 0) ? 'disabled' : ''" style="grid-area: wife" @click="_append('老婆')">妻</button>
+		<button :class="{ active: data.isActive === '老公', disabled: data.sex === 1 }" style="grid-area: husband"
+			@click="_append('老公')">夫</button>
+		<button :class="{ active: data.isActive === '老婆', disabled: data.sex === 0 }" style="grid-area: wife"
+			@click="_append('老婆')">妻</button>
 
-		<button style="grid-area: sister" @click="_append('姐姐')">姐</button>
-		<button style="grid-area: younger_sister" @click="_append('妹妹')">妹</button>
+		<button :class="{ active: data.isActive === '姐姐' }" style="grid-area: sister" @click="_append('姐姐')">姐</button>
+		<button :class="{ active: data.isActive === '妹妹' }" style="grid-area: younger_sister"
+			@click="_append('妹妹');">妹</button>
 
-		<button style="grid-area: dad" @click="_append('爸爸')">父</button>
-		<button style="grid-area: mom" @click="_append('妈妈')">母</button>
+		<button :class="{ active: data.isActive === '爸爸' }" style="grid-area: dad" @click="_append('爸爸')">父</button>
+		<button :class="{ active: data.isActive === '妈妈' }" style="grid-area: mom" @click="_append('妈妈')">母</button>
 
-		<button style="grid-area: back" @click="_delete">
+		<button :class="{ active: data.isActive === 'delete' }" style="grid-area: back" @click="_delete">
 			<svg style="width:24px;height:24px;margin-top: 6px;" viewBox="0 0 24 24">
 				<path fill="currentColor"
 					d="M22,3H7C6.31,3 5.77,3.35 5.41,3.88L0,12L5.41,20.11C5.77,20.64 6.31,21 7,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12" />
