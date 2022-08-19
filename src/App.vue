@@ -116,7 +116,7 @@ const _calculate = () => {
 		<h2>加载中</h2>
 	</div>
 
-	<a href="https://github.com/Binaryify/NeteaseCloudMusicApi" target="_blank" class="github"
+	<a href="https://github.com/PluginsKers/kinship_calculator" target="_blank" class="github"
 		aria-label="View source on Github"><svg viewBox="0 0 250 250" aria-hidden="true">
 			<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
 			<path
