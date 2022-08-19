@@ -1,5 +1,6 @@
 {
   "name": "kinship_calculator",
+  "description": "亲戚关系计算器",
   "author": "PluginsKers",
   "private": false,
   "version": "0.0.1",

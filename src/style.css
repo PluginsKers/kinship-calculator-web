@@ -61,6 +61,7 @@ html, body {
 }
 
 .calculator button.disabled {
+	pointer-events: none;
 	background: linear-gradient(135deg, rgb(225 225 225) 0%, rgb(231 231 231) 100%);
 	box-shadow: 5px 5px 10px #eeeeee, -5px -5px 10px #eeeeee;
 }
