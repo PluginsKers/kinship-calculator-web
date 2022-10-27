@@ -1,5 +1,5 @@
 
-![](https://jsdelivr.pai233.top/gh/pluginskers/cdn/2022/202208191806088.png)
+![](https://fastly.i5res.com/gh/pluginskers/cdn/2022/20221027101622.png)
 
 # Kinship Calculator
 
