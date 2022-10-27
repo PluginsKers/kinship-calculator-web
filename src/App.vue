@@ -93,7 +93,7 @@ const _append = (v: string) => {
 	let arr = data.search.split('的'),
 		search = data.search
 
-	if (arr.length > 10) {
+	if (arr.length > 20) {
 		data.search = '';
 		data.append = '';
 		data.result = '------';
@@ -226,6 +226,6 @@ const _active = (n: string) => {
 }
 
 .github svg {
-	fill: #999999;
+	fill: #1ac785;
 }
 </style>
